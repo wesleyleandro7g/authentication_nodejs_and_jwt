@@ -5,7 +5,7 @@ const authConfig = require("./authConfig");
 module.exports = {
   async sign(payload) {
     const token = await jwt.sign({ payload }, authConfig.secret, {
-      expiresIn: 84000, // expires in 5min
+      expiresIn: 84000,
     });
 
     return token;

@@ -34,7 +34,7 @@ module.exports = {
   //### Controller de listagem de todos todos os projetos de um usário
   async listAll(req, res) {
     try {
-      const project = await Project.find().populate("user");
+      const project = await Project.find().populate(["tasks", "user"]);
 
       return res.send({ project });
     } catch (error) {
@@ -44,7 +44,10 @@ module.exports = {
   //### Controller de listagem de um projeto específico de um usuário
   async show(req, res) {
     try {
-      const project = await Project.findById(req.params.projectId);
+      const project = await Project.findById(req.params.projectId).populate([
+        "tasks",
+        "user",
+      ]);
 
       return res.send({ project });
     } catch (error) {
