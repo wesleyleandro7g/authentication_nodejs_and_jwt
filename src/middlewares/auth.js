@@ -21,7 +21,8 @@ module.exports = (req, res, next) => {
       return res.status(401).send({ error: err });
     }
 
-    req.userId = decoded.id;
+    req.userId = decoded.payload;
+
     return next();
   });
 };
