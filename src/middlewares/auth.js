@@ -6,17 +6,17 @@ module.exports = (req, res, next) => {
 
   if (!authHeader) return res.status(401).send({ error: "No token provider" });
 
-  //   const parts = authHeader.split(" ");
+  const parts = authHeader.split(" ");
 
-  //   if (!parts.length === 2)
-  //     return res.status(401).send({ error: "Token error" });
+  if (!parts.length === 2)
+    return res.status(401).send({ error: "Token error" });
 
-  //   const [schema, token] = parts;
+  const [schema, token] = parts;
 
-  //   if (!/^Bearer$/i.test(schema))
-  //     return res.status(401).send({ error: "Token malformated" });
+  if (!/^Bearer$/i.test(schema))
+    return res.status(401).send({ error: "Token malformated" });
 
-  jwt.verify(authHeader, authConfig.secret, (err, decoded) => {
+  jwt.verify(token, authConfig.secret, (err, decoded) => {
     if (err) {
       return res.status(401).send({ error: err });
     }
